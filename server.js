@@ -13,53 +13,52 @@ app.use(express.static('static'));
 
 // Ejemplo de servidor CON Express
 
-// crear file
+// crear un file
 app.get('/crear', (req,res) => {
     console.log(req.query);
-//    const archive = `archive/${req.query.archivo}`;
-    const archive = `${req.query.archivo}`;
+    const archive = `archivo/${req.query.archivo}`;
+//    const archive = `${req.query.archivo}`;
     const contenido = `${req.query.contenido}`;
 
     fs.writeFile(archive, contenido, 'utf-8',function() {
       console.log('archivo creado')
     });
     res.send('creando el archivo');
-    res.end;
 })
     
 
-// leer file
+// leer un file
 
 app.get('/leer',(req,res) => {
     console.log(req.query);
-    const archive = `archive/${req.query.archivo}`;    
+    const archive = `archivo/${req.query.archivo}`;    
+//    const archive = `archive/${req.query.archivo}`;    
     fs.readFile(archive, 'utf-8', function(err, data){
         res.send('archivo leido');
         console.log(data);
-        //        res.end;
     });
 })
 
 
-// leer renombrar
+//  renombrar un file
 app.get('/renombrar',(req,res) => {
     console.log(req.query);
-    const nombre = `archive/${req.query.nombre}`;    
-    const nuevoNombre = `archive/${req.query.nuevoNombre}`;    
+//    const nombre = `archive/${req.query.nombre}`;    
+//    const nuevoNombre = `archive/${req.query.nuevoNombre}`;    
+    const nombre = `archivo/${req.query.nombre}`;    
+    const nuevoNombre = `archivo/${req.query.nuevoNombre}`;    
     fs.rename(nombre,nuevoNombre, function() {console.log('archivo renombrado')});
     res.send('renombrando el archivo');
-//    res.end;
 })
 
 
-// leer  eliminar
+// eliminar un file
 app.get('/eliminar',(req,res) => {
     console.log(req.query);
-    const archive = `archive/${req.query.archivo}`;    
+    const archive = `archivo/${req.query.archivo}`;    
     fs.unlink(archive, function() {console.log('archivo eliminado')});
     res.send('archivo eliminado');
-//    res.end;
-  })
+})
   
   
   app.listen(3000,function(){console.log('servidor funciona  en puerto 3000')});
