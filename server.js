@@ -21,9 +21,8 @@ app.get('/crear', (req,res) => {
     const contenido = `${req.query.contenido}`;
 
     fs.writeFile(archive, contenido, 'utf-8',function() {
-      console.log('archivo creado')
+        res.send('creando el archivo');
     });
-    res.send('creando el archivo');
 })
     
 
@@ -34,8 +33,7 @@ app.get('/leer',(req,res) => {
     const archive = `archivo/${req.query.archivo}`;    
 //    const archive = `archive/${req.query.archivo}`;    
     fs.readFile(archive, 'utf-8', function(err, data){
-        res.send('archivo leido');
-        console.log(data);
+        res.send('contenido del archivo :' + data);
     });
 })
 
@@ -47,8 +45,7 @@ app.get('/renombrar',(req,res) => {
 //    const nuevoNombre = `archive/${req.query.nuevoNombre}`;    
     const nombre = `archivo/${req.query.nombre}`;    
     const nuevoNombre = `archivo/${req.query.nuevoNombre}`;    
-    fs.rename(nombre,nuevoNombre, function() {console.log('archivo renombrado')});
-    res.send('renombrando el archivo');
+    fs.rename(nombre,nuevoNombre, function() {res.send('archivo renombrado')});
 })
 
 
@@ -56,8 +53,7 @@ app.get('/renombrar',(req,res) => {
 app.get('/eliminar',(req,res) => {
     console.log(req.query);
     const archive = `archivo/${req.query.archivo}`;    
-    fs.unlink(archive, function() {console.log('archivo eliminado')});
-    res.send('archivo eliminado');
+    fs.unlink(archive, function() {res.send('archivo eliminado')});
 })
   
   
